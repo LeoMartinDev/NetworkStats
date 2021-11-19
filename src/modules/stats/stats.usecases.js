@@ -5,12 +5,12 @@ module.exports = {
   monitorNetworkStats,
 };
 
-function monitorNetworkStats({ options, onData, logger }) {
+function monitorNetworkStats({ options, onData, onWarning }) {
   const networkStats = new NetworkStats({ options });
 
   networkStats.on('data', onData);
 
-  networkStats.on('warn', logger.warn);
+  networkStats.on('warn', onWarning);
 
   networkStats.startMonitoring();
 }

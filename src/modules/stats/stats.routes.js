@@ -14,7 +14,7 @@ module.exports = async (instance) => {
       instance.log.debug(data, 'New network stats');
       networkStatsRepository.insert({ data });
     },
-    logger: instance.log,
+    onWarning: instance.log.warn,
   });
 
   instance.route(getStatsRoute({ instance, networkStatsRepository }));
