@@ -1,0 +1,43 @@
+{
+  "name": "internet-speed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"mix watch --hot\" \"node src/index.js\"",
+    "start": "NODE_ENV=production mix && NODE_ENV=production node src/index.js"
+  },
+  "engines": {
+    "node": "^16.13.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "convict": "^6.2.1",
+    "convict-format-with-validator": "^6.2.0",
+    "dotenv": "^10.0.0",
+    "fastify": "^3.24.0",
+    "fastify-knexjs": "^1.4.0",
+    "fastify-static": "^4.5.0",
+    "knex": "^0.95.14",
+    "lodash": "^4.17.21",
+    "mysql": "^2.18.1",
+    "pg": "^8.7.1",
+    "pino": "^7.2.0",
+    "promise-retry": "^2.0.1",
+    "sqlite3": "^5.0.2",
+    "vue": "^3.2.22"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.22",
+    "concurrently": "^6.4.0",
+    "handlebars": "^4.7.7",
+    "handlebars-layouts": "^3.1.4",
+    "laravel-mix": "^6.0.39",
+    "laravel-mix-handlebars": "^1.0.3",
+    "pino-pretty": "^7.2.0",
+    "vue-loader": "^16.8.3"
+  }
+}
