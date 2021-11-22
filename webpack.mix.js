@@ -20,12 +20,13 @@ mix.options({
 });
 
 mix
-  .js(path.join(CLIENT_PATH, 'app.js'), 'js')
-  .vue({ version: 3 })
+  .js(path.join(CLIENT_PATH, 'index.js'), 'js')
+  .react()
   .handlebars(CLIENT_PATH, PUBLIC_PATH, {
     isProduction: IS_PRODUCTION,
     baseURL: IS_PRODUCTION ? '' : `http://${options.hmr.host}:${options.hmr.port}`
   })
+  .extract(['react'])
   .setPublicPath(PUBLIC_PATH)
   .disableNotifications()
   .disableSuccessNotifications();

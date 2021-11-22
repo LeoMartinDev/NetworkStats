@@ -19,7 +19,7 @@ module.exports = ({ knex }) => ({
   
     return formatOneNetworkStat(stat);
   },
-  async insert({ data }) {
+  async insertOne({ data }) {
     const [id] = await knex.insert(data).into('network_stats', ['id']);
   
     return this.findOneById({ id });

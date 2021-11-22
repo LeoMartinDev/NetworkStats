@@ -12,7 +12,7 @@ module.exports = async (instance) => {
     },
     onData: (data) => {
       instance.log.debug(data, 'New network stats');
-      networkStatsRepository.insert({ data });
+      networkStatsRepository.insertOne({ data });
     },
     onWarning: instance.log.warn,
   });

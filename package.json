@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"mix watch --hot\" \"node src/index.js\"",
+    "dev": "concurrently \"mix && mix watch --hot\" \"node src/index.js\"",
     "start": "NODE_ENV=production mix && NODE_ENV=production node src/index.js"
   },
   "engines": {
@@ -15,6 +15,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.1.1",
+    "@mui/material": "^5.1.1",
+    "chart.js": "^3.6.0",
     "convict": "^6.2.1",
     "convict-format-with-validator": "^6.2.0",
     "dotenv": "^10.0.0",
@@ -27,17 +32,20 @@
     "pg": "^8.7.1",
     "pino": "^7.2.0",
     "promise-retry": "^2.0.1",
-    "sqlite3": "^5.0.2",
-    "vue": "^3.2.22"
+    "react": "^17.0.2",
+    "react-chartjs-2": "^3.3.0",
+    "react-dom": "^17.0.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.2.22",
+    "@babel/preset-react": "^7.16.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.2",
     "concurrently": "^6.4.0",
     "handlebars": "^4.7.7",
     "handlebars-layouts": "^3.1.4",
     "laravel-mix": "^6.0.39",
     "laravel-mix-handlebars": "^1.0.3",
     "pino-pretty": "^7.2.0",
-    "vue-loader": "^16.8.3"
+    "react-refresh": "^0.11.0"
   }
 }
