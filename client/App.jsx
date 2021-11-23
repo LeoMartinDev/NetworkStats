@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { createTheme, CssBaseline, ThemeProvider, Typography, useMediaQuery } from '@mui/material';
 import { Box } from '@mui/system';
-import ChartsPage from './pages/Charts';
+import PanelsPage from './pages/Panels';
 import { getStats } from './api';
 
 export function App() {
@@ -30,7 +30,7 @@ export function App() {
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ChartsPage stats={stats} />
+        <PanelsPage stats={stats} />
       </ThemeProvider>
     </React.StrictMode>
   );

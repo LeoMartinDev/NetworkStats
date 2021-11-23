@@ -2,9 +2,11 @@ const _ = require('lodash');
 
 const formatOneNetworkStat = ({ id, download, upload, ping, created_at }) => ({
   id,
-  download,
-  upload,
-  ping,
+  metrics: {
+    download,
+    upload,
+    ping,
+  },
   date: created_at,
 });
 
