@@ -1,13 +1,23 @@
-import { AppBar, Card, CardContent, Divider, Toolbar, Typography } from "@mui/material";
+import { Card, CardContent, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function Panel({ title, children }) {
+function Content({ isLoading, children }) {
+  if (isLoading) {
+    return <Skeleton variant="rectangular" />;
+  }
+
+  return children;
+}
+
+export default function Panel({ title, children, isLoading, header }) {
   return (
     <Card variant="outlined">
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Box
           sx={{
             display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
             borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
             bgcolor: 'background.paper',
             color: 'text.secondary',
@@ -22,9 +32,10 @@ export default function Panel({ title, children }) {
           }}
         >
           <Typography>{title}</Typography>
+          {header ? <Box sx={{ flex: '0' }}>{header}</Box> : null}
         </Box>
         <CardContent sx={{ flex: '1 0 auto' }}>
-          {children}
+          <Content isLoading={isLoading}>{children}</Content>
         </CardContent>
       </Box>
     </Card>

@@ -1,16 +1,31 @@
+import useSWR from "swr";
+
+export {
+  useNetworkSpeedPanelData,
+};
+
 const BASE_URL = 'http://localhost:3000/api';
 
-async function request({ path }) {
-  const fetchResult = await fetch(`${BASE_URL}/${path}`);
-  const response = await fetchResult.json();
+const fetcher = async (url) => {
+  const response = await fetch(`${BASE_URL}/${url}`);
 
-  if (fetchResult.ok) {
-    return response;
+  if (!response.ok) {
+    const error = new Error('An error occurred while fetching the data.')
+
+    error.info = await response.json()
+    error.status = response.status
+    throw error
   }
 
-  throw response;
-}
+  return response.json()
+};
 
-export function getStats() {
-  return request({ path: 'stats'});
+function useNetworkSpeedPanelData(options) {
+  const { data, error } = useSWR(`panels/network-speed`, fetcher, options)
+
+  return {
+    data,
+    error,
+    isLoading: !error && !data,
+  };
 }

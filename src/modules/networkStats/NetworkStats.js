@@ -2,7 +2,7 @@ const { EventEmitter } = require('events');
 const _ = require('lodash');
 
 const runSpeedTest = require('./speedTest.service');
-const { formatBandwidthToMbps } = require('./stats.models');
+const { formatBandwidthToMbps } = require('./networkStats.model');
 
 const DEFAULT_OPTIONS = {
   interval: 30 * 1000,

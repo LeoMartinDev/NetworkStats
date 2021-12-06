@@ -12,7 +12,7 @@ module.exports = {
       t.float('upload').notNullable();
       t.float('download').notNullable();
       t.float('ping').notNullable();
-      t.datetime('created_at').defaultTo(knex.fn.now());
+      t.timestamps(true, true);
     });
   },
   down: (knex) =>{

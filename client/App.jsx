@@ -1,11 +1,10 @@
 import * as React from 'react';
 
-import { createTheme, CssBaseline, ThemeProvider, Typography, useMediaQuery } from '@mui/material';
-import { Box } from '@mui/system';
+import { createTheme, CssBaseline, ThemeProvider, useMediaQuery } from '@mui/material';
 import PanelsPage from './pages/Panels';
-import { getStats } from './api';
 
 export function App() {
+  let timeoutId;
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   const theme = React.useMemo(
@@ -18,19 +17,42 @@ export function App() {
     [prefersDarkMode],
   );
 
-  const [stats, setStats] = React.useState([]);
+  const [state, setState] = React.useState({
+    stats: [],
+    units: {},
+  });
 
-  React.useEffect(async () => {
-    const response = await getStats();
+  // const fetchStats = async () => {
+  //   const { stats, units } = await getStats();
 
-    setStats(response);
-  }, []);
+  //   setState((prevState) => ({
+  //     ...prevState,
+  //     stats,
+  //     units,
+  //   }));
+  // };
+
+  // const pollStats = async () => {
+  //   await fetchStats();
+
+  //   timeoutId = setTimeout(async () => {
+  //     pollStats();
+  //   }, 120000);
+  // };
+
+  // React.useEffect(async () => {
+  //   // pollStats();
+
+  //   return () => {
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, []);
 
   return (
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <PanelsPage stats={stats} />
+        <PanelsPage stats={state.stats} units={state.units} />
       </ThemeProvider>
     </React.StrictMode>
   );

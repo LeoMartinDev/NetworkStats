@@ -6,17 +6,24 @@ module.exports = {
 };
 
 function monitorNetworkStats({ options, onData, onWarning }) {
-  const networkStats = new NetworkStats({ options });
+  const stats = new NetworkStats({ options });
 
-  networkStats.on('data', onData);
+  stats.on('data', onData);
 
-  networkStats.on('warn', onWarning);
+  stats.on('warn', onWarning);
 
-  networkStats.startMonitoring();
+  stats.startMonitoring();
 }
 
 async function getStats({ networkStatsRepository }) {
   const stats = await networkStatsRepository.find();
 
-  return stats;
+  return {
+    stats,
+    units: {
+      ping: 'ms',
+      upload: 'mbps',
+      download: 'mbps',
+    },
+  };
 }

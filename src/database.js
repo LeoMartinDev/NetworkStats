@@ -18,6 +18,7 @@ function getDatabaseConfig({ database }) {
     client: DATABASES_CLIENTS[database.type],
     connection: _.pick(database, ['host', 'port', 'user', 'password', 'database']),
     useNullAsDefault: true,
+    timezone: '+00:00',
   };
 
   if (database.type !== 'sqlite') {
