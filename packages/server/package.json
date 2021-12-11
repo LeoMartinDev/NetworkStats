@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "convict": "^6.2.1",
+    "convict-format-with-validator": "^6.2.0",
+    "dayjs": "^1.10.7",
+    "dotenv": "^10.0.0",
+    "fastify": "^3.24.1",
+    "fastify-knexjs": "^1.4.0",
+    "fastify-plugin": "^3.0.0",
+    "knex": "^0.95.14",
+    "lodash": "^4.17.21",
+    "mysql": "^2.18.1",
+    "pg": "^8.7.1",
+    "pino": "^7.5.1",
+    "pino-pretty": "^7.2.0",
+    "promise-retry": "^2.0.1",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

@@ -1,9 +1,6 @@
-import { Line } from 'react-chartjs-2';
-import _ from 'lodash';
-
 import { Container, Grid } from '@mui/material';
 import NetworkSpeedPanel from '../modules/panels/NetworkSpeedPanel';
-import DailyAveragePanel from '../modules/panels/DailyAveragePanel';
+// import DailyAveragePanel from '../modules/panels/DailyAveragePanel';
 
 export default function PanelsPage({ stats, units }) {
   return (

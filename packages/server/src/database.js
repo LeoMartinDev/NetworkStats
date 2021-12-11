@@ -4,7 +4,7 @@ const plugin = require('fastify-plugin');
 
 const config = require('../config');
 
-const SQLITE_FILE_PATH = path.resolve(__dirname, '../data/db.sqlite');
+const SQLITE_FILE_PATH = path.resolve(__dirname, '../../../data/db.sqlite');
 const MIGRATIONS_PATH = path.resolve(__dirname, '../migrations');
 
 const DATABASES_CLIENTS = {

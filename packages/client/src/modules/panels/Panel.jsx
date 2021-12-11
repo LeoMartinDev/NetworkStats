@@ -1,15 +1,7 @@
-import { Card, CardContent, Skeleton, Typography } from "@mui/material";
+import { Card, CardContent, LinearProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-function Content({ isLoading, children }) {
-  if (isLoading) {
-    return <Skeleton variant="rectangular" />;
-  }
-
-  return children;
-}
-
-export default function Panel({ title, children, isLoading, header }) {
+export default function Panel({ title, children, header, isLoading }) {
   return (
     <Card variant="outlined">
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -27,6 +19,7 @@ export default function Panel({ title, children, isLoading, header }) {
             '& hr': {
               mx: 0.5,
             },
+            height: '56px',
             paddingX: (theme) => theme.spacing(2),
             paddingY: (theme) => theme.spacing(1),
           }}
@@ -34,8 +27,9 @@ export default function Panel({ title, children, isLoading, header }) {
           <Typography>{title}</Typography>
           {header ? <Box sx={{ flex: '0' }}>{header}</Box> : null}
         </Box>
+        <LinearProgress sx={{ opacity: isLoading ? '1' : '0' }} />
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Content isLoading={isLoading}>{children}</Content>
+          {children}
         </CardContent>
       </Box>
     </Card>

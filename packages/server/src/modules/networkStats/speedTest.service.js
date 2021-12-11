@@ -1,6 +1,4 @@
 const util = require('util');
-const _ = require('lodash');
-const path = require('path');
 const exec = util.promisify(require('child_process').exec);
 const promiseRetry = require('promise-retry');
 

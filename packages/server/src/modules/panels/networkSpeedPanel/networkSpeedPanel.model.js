@@ -31,7 +31,7 @@ function getNetworkStatsByPeriod({ networkStats, periodType }) {
   const periodTypeGroupFn = {
     [PERIOD_TYPES.HOUR]: ({ date }) => dayjs(date).utc().format('YYYY-MM-DD HH:mm'),
     [PERIOD_TYPES.DAY]: ({ date }) => dayjs(date).utc().format('YYYY-MM-DD HH'),
-    [PERIOD_TYPES.WEEK]: ({ date }) => `${dayjs(date).utc().format('YYYY-MM-DD')}}`,
+    [PERIOD_TYPES.WEEK]: ({ date }) => dayjs(date).utc().format('YYYY-MM-DD'),
   };
 
   const groupFn = periodTypeGroupFn[periodType] || periodTypeGroupFn[DEFAULT_PERIOD_TYPE];
@@ -40,18 +40,37 @@ function getNetworkStatsByPeriod({ networkStats, periodType }) {
 }
 
 function getPerMetricNetworkStats({ networkStatsByPeriod }) {
+  // Pour chaque periode il faut prendre la moyenne de chaque metric
   return _.chain(networkStatsByPeriod)
-    .map((networkStats, period) =>
-      _.map(networkStats, ({ metrics }) =>
-        _.map(metrics, (value, metric) => ({
-          value,
-          metric,
-        })),
-    ))
-    .flattenDeep()
+    .mapValues((networkStats) =>
+      _.chain(networkStats)
+        .map(({ metrics }) =>
+          _.map(metrics, (value, metric) => ({ metric, value }))
+        )
+        .flatten()
+        .groupBy('metric')
+        .value()
+    )
+    .mapValues((metrics) =>
+      _.mapValues(metrics, (networkStats) => _.chain(networkStats).meanBy('value').ceil(1).value())
+    )
+    .map((metrics) => _.map(metrics, (value, metric) => ({ value, metric })))
+    .flatten()
     .groupBy('metric')
     .mapValues((networkStats) => _.map(networkStats, 'value'))
     .value();
+  // return _.chain(networkStatsByPeriod)
+  //   .map((networkStats, _period) =>
+  //     _.map(networkStats, ({ metrics }) =>
+  //       _.map(metrics, (value, metric) => ({
+  //         value,
+  //         metric,
+  //       })),
+  //   ))
+  //   .flattenDeep()
+  //   .groupBy('metric')
+  //   .mapValues((networkStats) => _.map(networkStats, 'value'))
+  //   .value();
 }
 
 function getPeriodsLabels({ networkStatsByPeriod, periodType }) {

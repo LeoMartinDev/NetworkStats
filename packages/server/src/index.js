@@ -8,8 +8,7 @@ const config = require('../config');
 const database = require('./database');
 const routes = require('./routes');
 
-const PUBLIC_PATH = path.resolve(__dirname, '../public');
-const LOGS_FILE_PATH = path.resolve(__dirname, '../data/logs.out');
+const LOGS_FILE_PATH = path.resolve(__dirname, '../../../data/logs.out');
 
 const loggerLevel = config.get('logger.level');
 
@@ -28,16 +27,13 @@ instance.log.info(config.getProperties(), 'Using following configuration');
 
 instance.register(database);
 
-instance.register(require('fastify-static'), {
-  root: PUBLIC_PATH,
-});
-
 instance.register(routes, { prefix: '/api' });
 
 const start = async () => {
   try {
     await instance.listen(3000)
   } catch (err) {
+    console.log(err)
     instance.log.error(err)
     process.exit(1)
   }
